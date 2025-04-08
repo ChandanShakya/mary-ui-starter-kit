@@ -41,8 +41,8 @@ new class extends Component {
             ['key' => 'id', 'label' => '#', 'class' => 'w-1'],
             ['key' => 'name', 'label' => 'Name', 'sortable' => true],
             ['key' => 'email', 'label' => 'Email', 'sortable' => true],
-            ['key' => 'roles', 'label' => 'Roles'],
-            ['key' => 'actions', 'label' => 'Actions', 'class' => 'w-1'],
+            ['key' => 'roles', 'label' => 'Roles', 'sortable' => false],
+            ['key' => 'actions', 'label' => 'Actions', 'class' => 'w-1 text-center', 'sortable' => false],
         ];
     }
 
@@ -168,7 +168,7 @@ new class extends Component {
             @endscope
             
             @scope('actions', $user)
-                <div class="flex gap-1">
+                <div class="flex justify-center gap-1">
                     <x-button icon="o-pencil" class="btn-ghost btn-sm" @click="$wire.edit({{ $user->id }})" />
                     <x-button icon="o-trash" class="btn-ghost btn-sm text-error" 
                         @click="$wire.delete({{ $user->id }})"
@@ -185,7 +185,7 @@ new class extends Component {
             <x-input label="Email" wire:model="email" type="email" />
             <x-input label="Password" wire:model="password" type="password" :required="!$editing_id" />
             
-            <x-select 
+            <x-choices 
                 label="Roles" 
                 wire:model="selected_roles" 
                 :options="$roles" 

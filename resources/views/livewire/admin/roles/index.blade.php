@@ -38,8 +38,8 @@ new class extends Component {
         return [
             ['key' => 'id', 'label' => '#', 'class' => 'w-1'],
             ['key' => 'name', 'label' => 'Name', 'sortable' => true],
-            ['key' => 'permissions', 'label' => 'Permissions'],
-            ['key' => 'actions', 'label' => 'Actions', 'class' => 'w-1'],
+            ['key' => 'permissions', 'label' => 'Permissions', 'sortable' => false],
+            ['key' => 'actions', 'label' => 'Actions', 'class' => 'w-1 text-center', 'sortable' => false],
         ];
     }
 
@@ -153,7 +153,7 @@ new class extends Component {
             @endscope
             
             @scope('actions', $role)
-                <div class="flex gap-1">
+                <div class="flex justify-center gap-1">
                     <x-button icon="o-pencil" class="btn-ghost btn-sm" @click="$wire.edit({{ $role->id }})" />
                     <x-button icon="o-trash" class="btn-ghost btn-sm text-error" 
                         @click="$wire.delete({{ $role->id }})"

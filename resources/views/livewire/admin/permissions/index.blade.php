@@ -35,7 +35,7 @@ new class extends Component {
         return [
             ['key' => 'id', 'label' => '#', 'class' => 'w-1'],
             ['key' => 'name', 'label' => 'Name', 'sortable' => true],
-            ['key' => 'actions', 'label' => 'Actions', 'class' => 'w-1'],
+            ['key' => 'actions', 'label' => 'Actions', 'class' => 'w-1', 'sortable' => false],
         ];
     }
 
