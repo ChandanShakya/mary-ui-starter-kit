@@ -42,6 +42,8 @@
                             <x-button icon="o-power" class="btn-circle btn-ghost btn-xs" tooltip-left="logoff" no-wire-navigate link="/logout" />
                         </x-slot:actions>
                     </x-list-item>
+                    
+                    <x-menu-item title="Dashboard" icon="o-home" link="/dashboard" />
                     <x-menu-item title="Users" icon="o-sparkles" link="/users" />
 
                     <x-menu-separator />
