@@ -43,8 +43,19 @@
                         </x-slot:actions>
                     </x-list-item>
                     
+                    <x-menu-separator />
+
+                    {{-- Dashboard (accessible by all authenticated users) --}}
                     <x-menu-item title="Dashboard" icon="o-home" link="/dashboard" />
-                    <x-menu-item title="Users" icon="o-sparkles" link="/users" />
+
+                    {{-- Admin only menu items --}}
+                    @role('admin')
+                        <x-menu-sub title="Administration" icon="o-cog">
+                            <x-menu-item title="Users" icon="o-users" link="/admin/users" />
+                            <x-menu-item title="Roles" icon="o-user-group" link="/admin/roles" />
+                            <x-menu-item title="Permissions" icon="o-key" link="/admin/permissions" />
+                        </x-menu-sub>
+                    @endrole
 
                     <x-menu-separator />
                 @endif

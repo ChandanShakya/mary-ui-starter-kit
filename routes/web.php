@@ -15,6 +15,12 @@ Route::middleware('guest')->group(function () {
 // Protected routes
 Route::middleware('auth')->group(function () {
     Volt::route('/logout', 'auth.logout')->name('logout');
-    Volt::route('/dashboard', 'dashboard')->name('dashboard');
-    Volt::route('/users', 'users.index')->name('users.index');
+    Volt::route('/dashboard', 'dashboard')->name('dashboard')->middleware('permission:access dashboard');
+    
+    // Admin routes
+    Route::middleware('role:admin')->prefix('admin')->name('admin.')->group(function () {
+        Volt::route('/users', 'admin.users.index')->name('users.index');
+        Volt::route('/roles', 'admin.roles.index')->name('roles.index');
+        Volt::route('/permissions', 'admin.permissions.index')->name('permissions.index');
+    });
 });
