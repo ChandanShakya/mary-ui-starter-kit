@@ -12,6 +12,7 @@ new class extends Component {
     public string $search = '';
     public bool $drawer = false;
     public array $sortBy = ['column' => 'name', 'direction' => 'asc'];
+    public int $perPage = 10;
     
     // Form properties
     public ?int $editing_id = null;
@@ -42,7 +43,7 @@ new class extends Component {
         ];
     }
 
-    public function roles(): Collection
+    public function roles()
     {
         return Role::query()
             ->with('permissions')
@@ -50,7 +51,7 @@ new class extends Component {
                 $query->where('name', 'like', '%'.$this->search.'%');
             })
             ->orderBy(...array_values($this->sortBy))
-            ->get();
+            ->paginate($this->perPage);
     }
 
     public function edit(Role $role): void
@@ -134,7 +135,15 @@ new class extends Component {
 
     <!-- TABLE -->
     <x-card>
-        <x-table :headers="$headers" :rows="$roles" :sort-by="$sortBy" striped>
+        <x-table 
+            :headers="$headers" 
+            :rows="$roles" 
+            :sort-by="$sortBy" 
+            striped 
+            with-pagination
+            per-page="perPage"
+            :per-page-values="[5, 10, 15, 25, 50]"
+        >
             @scope('cell_permissions', $role)
                 <div class="flex flex-wrap gap-1">
                     @foreach($role->permissions as $permission)
@@ -159,7 +168,7 @@ new class extends Component {
         <x-form wire:submit="save">
             <x-input label="Name" wire:model="name" />
             
-            <x-select 
+            <x-choices 
                 label="Permissions" 
                 wire:model="selected_permissions" 
                 :options="$permissions" 

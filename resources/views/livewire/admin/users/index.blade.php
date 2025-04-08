@@ -12,6 +12,7 @@ new class extends Component {
     public string $search = '';
     public bool $drawer = false;
     public array $sortBy = ['column' => 'name', 'direction' => 'asc'];
+    public int $perPage = 10;
     
     // Form properties
     public ?int $editing_id = null;
@@ -45,7 +46,7 @@ new class extends Component {
         ];
     }
 
-    public function users(): Collection
+    public function users()
     {
         return User::query()
             ->with('roles')
@@ -54,7 +55,7 @@ new class extends Component {
                     ->orWhere('email', 'like', '%'.$this->search.'%');
             })
             ->orderBy(...array_values($this->sortBy))
-            ->get();
+            ->paginate($this->perPage);
     }
 
     public function edit(User $user): void
@@ -151,7 +152,15 @@ new class extends Component {
 
     <!-- TABLE -->
     <x-card>
-        <x-table :headers="$headers" :rows="$users" :sort-by="$sortBy" striped>
+        <x-table 
+            :headers="$headers" 
+            :rows="$users" 
+            :sort-by="$sortBy" 
+            striped 
+            with-pagination
+            per-page="perPage"
+            :per-page-values="[5, 10, 15, 25, 50]"
+        >
             @scope('cell_roles', $user)
                 @foreach($user->roles as $role)
                     <x-badge :value="$role->name" class="badge-ghost" />

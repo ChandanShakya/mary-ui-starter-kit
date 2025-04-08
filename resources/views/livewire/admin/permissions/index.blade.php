@@ -11,6 +11,7 @@ new class extends Component {
     public string $search = '';
     public bool $drawer = false;
     public array $sortBy = ['column' => 'name', 'direction' => 'asc'];
+    public int $perPage = 10;
     
     // Form properties
     public ?int $editing_id = null;
@@ -38,14 +39,14 @@ new class extends Component {
         ];
     }
 
-    public function permissions(): Collection
+    public function permissions()
     {
         return Permission::query()
             ->when($this->search, function ($query) {
                 $query->where('name', 'like', '%'.$this->search.'%');
             })
             ->orderBy(...array_values($this->sortBy))
-            ->get();
+            ->paginate($this->perPage);
     }
 
     public function edit(Permission $permission): void
@@ -123,7 +124,15 @@ new class extends Component {
 
     <!-- TABLE -->
     <x-card>
-        <x-table :headers="$headers" :rows="$permissions" :sort-by="$sortBy" striped>
+        <x-table 
+            :headers="$headers" 
+            :rows="$permissions" 
+            :sort-by="$sortBy" 
+            striped 
+            with-pagination
+            per-page="perPage"
+            :per-page-values="[5, 10, 15, 25, 50]"
+        >
             @scope('actions', $permission)
                 <div class="flex gap-1">
                     <x-button icon="o-pencil" class="btn-ghost btn-sm" @click="$wire.edit({{ $permission->id }})" />
