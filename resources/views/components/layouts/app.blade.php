@@ -42,16 +42,10 @@
                             <x-button icon="o-power" class="btn-circle btn-ghost btn-xs" tooltip-left="logoff" no-wire-navigate link="/logout" />
                         </x-slot:actions>
                     </x-list-item>
+                    <x-menu-item title="Users" icon="o-sparkles" link="/users" />
 
                     <x-menu-separator />
                 @endif
-
-                <x-menu-item title="Hello" icon="o-sparkles" link="/" />
-                
-                <x-menu-sub title="Settings" icon="o-cog-6-tooth">
-                    <x-menu-item title="Wifi" icon="o-wifi" link="####" />
-                    <x-menu-item title="Archives" icon="o-archive-box" link="####" />
-                </x-menu-sub>
             </x-menu>
         </x-slot:sidebar>
 
