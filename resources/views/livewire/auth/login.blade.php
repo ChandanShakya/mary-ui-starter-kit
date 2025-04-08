@@ -43,13 +43,21 @@ class extends Component {
         <x-app-brand />
     </div>
  
-    <x-form wire:submit="login">
-        <x-input placeholder="E-mail" wire:model="email" icon="o-envelope" />
-        <x-input placeholder="Password" wire:model="password" type="password" icon="o-key" />
- 
-        <x-slot:actions>
-            <x-button label="Create an account" class="btn-ghost" link="/register" />
-            <x-button label="Login" type="submit" icon="o-paper-airplane" class="btn-primary" spinner="login" />
-        </x-slot:actions>
-    </x-form>
+    <x-card title="Login" subtitle="Enter your credentials to access your account">
+        <x-form wire:submit="login">
+            <x-input placeholder="E-mail" wire:model="email" icon="o-envelope" />
+            <x-input placeholder="Password" wire:model="password" type="password" icon="o-key" />
+            
+            <div class="text-right mt-2">
+                <a href="{{ route('password.request') }}" class="text-sm text-primary hover:text-primary-focus">
+                    Forgot your password?
+                </a>
+            </div>
+    
+            <x-slot:actions>
+                <x-button label="Create an account" class="btn-ghost" link="/register" />
+                <x-button label="Login" type="submit" icon="o-paper-airplane" class="btn-primary" spinner="login" />
+            </x-slot:actions>
+        </x-form>
+    </x-card>
 </div>

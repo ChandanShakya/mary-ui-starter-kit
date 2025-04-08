@@ -43,6 +43,9 @@
                     {{-- Dashboard (accessible by all authenticated users) --}}
                     <x-menu-item title="Dashboard" icon="o-home" link="/dashboard" />
 
+                    {{-- Profile page --}}
+                    <x-menu-item title="Profile" icon="o-user" link="/profile" />
+
                     {{-- Admin only menu items --}}
                     @role('admin')
                         <x-menu-sub title="Administration" icon="o-cog">
