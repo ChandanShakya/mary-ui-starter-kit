@@ -61,7 +61,7 @@
                     <x-slot:actions>
                         <div class="flex items-center gap-2">
                             <x-theme-toggle class="btn btn-circle btn-ghost btn-sm" />
-                            <x-button icon="o-arrow-right-start-on-rectangle" class="btn-circle btn-ghost btn-xs" tooltip-left="logoff"
+                            <x-button icon="o-arrow-right-start-on-rectangle" class="btn-circle btn-ghost btn-xs" tooltip-left="Log-out"
                                 no-wire-navigate link="/logout" />
                         </div>
                     </x-slot:actions>
