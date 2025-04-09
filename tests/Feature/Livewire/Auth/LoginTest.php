@@ -1,9 +1,29 @@
 <?php
 
 use Livewire\Volt\Volt;
+use function Pest\Laravel\{get, post};
 
-it('can render', function () {
-    $component = Volt::test('auth.login');
+it('renders the login component', function () {
+    $response = get('/login');
+    $response->assertStatus(200);
+    $response->assertSee('Enter your credentials to access your account');
+});
 
-    $component->assertSee('');
+it('validates login inputs', function () {
+    $response = post('/login', [
+        'email' => '',
+        'password' => '',
+    ]);
+
+    $response->assertSessionHasErrors(['email', 'password']);
+});
+
+it('logs in with valid credentials', function () {
+    $response = post('/login', [
+        'email' => 'user@example.com',
+        'password' => 'password',
+    ]);
+
+    $response->assertRedirect('/dashboard');
+    $this->assertAuthenticated();
 });
