@@ -40,21 +40,28 @@
                 {{-- User --}}
                 @if ($user = auth()->user())
 
-                    {{-- Dashboard (accessible by all authenticated users) --}}
                     <x-menu-item title="Dashboard" icon="o-home" link="/dashboard" />
 
-                    {{-- Profile page --}}
+                    @if($user->hasVerifiedEmail())
+                        {{-- Dashboard (requires verified email) --}}
+    
+                        {{-- Admin only menu items (requires verified email) --}}
+                        @role('admin')
+                            <x-menu-sub title="Administration" icon="o-cog">
+                                <x-menu-item title="Users" icon="o-users" link="/admin/users" />
+                                <x-menu-item title="Roles" icon="o-user-group" link="/admin/roles" />
+                                <x-menu-item title="Permissions" icon="o-key" link="/admin/permissions" />
+                            </x-menu-sub>
+                        @endrole
+                    @else
+                        {{-- Verification reminder --}}
+                        <div class="p-4 mt-2 text-sm bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700">
+                            <p>Please verify your email to access all features.</p>
+                            <a href="{{ route('verification.notice') }}" class="text-blue-600 hover:underline">Verify Now</a>
+                        </div>
+                    @endif
+                    {{-- Profile page (always accessible) --}}
                     <x-menu-item title="Profile" icon="o-user" link="/profile" />
-
-                    {{-- Admin only menu items --}}
-                    @role('admin')
-                        <x-menu-sub title="Administration" icon="o-cog">
-                            <x-menu-item title="Users" icon="o-users" link="/admin/users" />
-                            <x-menu-item title="Roles" icon="o-user-group" link="/admin/roles" />
-                            <x-menu-item title="Permissions" icon="o-key" link="/admin/permissions" />
-                        </x-menu-sub>
-                    @endrole
-
                 @endif
 
                 <x-menu-separator />

@@ -16,6 +16,7 @@ class DefaultUsersSeeder extends Seeder
             'email' => 'admin@example.com',
             'password' => Hash::make('password'),
             'email_verified_at' => now(),
+            'previously_verified' => true,
         ]);
         $admin->assignRole('admin');
 
@@ -25,6 +26,7 @@ class DefaultUsersSeeder extends Seeder
             'email' => 'user@example.com',
             'password' => Hash::make('password'),
             'email_verified_at' => now(),
+            'previously_verified' => true,
         ]);
         $user->assignRole('user');
     }

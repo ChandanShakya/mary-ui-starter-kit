@@ -18,6 +18,11 @@ class extends Component {
     <div class="text-center mb-8">
         <h1 class="text-4xl font-bold mb-4">Welcome to Our Platform</h1>
         <p class="text-lg text-gray-600">Get started with your journey today</p>
+        @if (session('verified'))
+            <div class="mt-4">
+                <x-alert title="{{ session('verified') }}" class="alert-success" icon="o-check" />
+            </div>
+        @endif
     </div>
 
     <div class="flex flex-col md:flex-row gap-4">

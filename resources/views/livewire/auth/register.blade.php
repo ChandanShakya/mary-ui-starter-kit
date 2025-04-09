@@ -6,6 +6,7 @@ use Livewire\Attributes\Rule;
 use Livewire\Attributes\Title;
 use Livewire\Volt\Component;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Http;
 
 new
 #[Layout('components.layouts.empty')]
@@ -40,11 +41,16 @@ class extends Component {
 
         $user = User::create($data);
 
+        $user->assignRole('user');
+
         auth()->login($user);
 
         request()->session()->regenerate();
 
-        return redirect('/');
+        $user->sendEmailVerificationNotification();
+
+        // Redirect to verification notice page
+        return redirect()->route('verification.notice');
     }
 }; ?>
 

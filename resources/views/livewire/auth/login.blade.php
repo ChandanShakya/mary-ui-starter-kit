@@ -29,8 +29,15 @@ class extends Component {
         $credentials = $this->validate();
 
         if (auth()->attempt($credentials)) {
+            $user = auth()->user();
+            
             request()->session()->regenerate();
 
+            // If email is not verified, redirect to verification page
+            if (!$user->hasVerifiedEmail()) {
+                return redirect()->route('verification.notice');
+            }
+            
             return redirect()->intended('/');
         }
 
