@@ -29,6 +29,8 @@ You can create a new Mary UI Starter Kit project via laravel installer:
 laravel new my-app --using=chandanshakya/mary-ui-starter-kit
 ```
 
+or using composer
+
 ```bash
 composer create-project chandanshakya/mary-ui-starter-kit
 ```
@@ -99,7 +101,7 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## Security Vulnerabilities
 
-If you discover a security vulnerability within this starter kit, please send an e-mail to Chandan Shakya via [me@chandanshakya.com.np](mailto:email@chandanshakya.com.np). All security vulnerabilities will be promptly addressed.
+If you discover a security vulnerability within this starter kit, please send an e-mail to Chandan Shakya via [email@chandanshakya.com.np](mailto:email@chandanshakya.com.np). All security vulnerabilities will be promptly addressed.
 
 ## License
 
