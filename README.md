@@ -1,8 +1,7 @@
 # Mary UI Starter Kit for Laravel
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/ChandanShakya/mary-ui-starter-kit.svg?style=flat-square)](https://packagist.org/packages/ChandanShakya/mary-ui-starter-kit)
-![Packagist Downloads](https://img.shields.io/packagist/dt/ChandanShakya/mary-ui-starter-kit)
-[![License](https://img.shields.io/packagist/l/ChandanShakya/mary-ui-starter-kit.svg?style=flat-square)](https://packagist.org/packages/ChandanShakya/mary-ui-starter-kit)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/chandanshakya/mary-ui-starter-kit)](https://packagist.org/packages/ChandanShakya/mary-ui-starter-kit)
+[![Total Downloads](https://img.shields.io/packagist/dt/ChandanShakya/mary-ui-starter-kit)](https://packagist.org/packages/chandanshakya/mary-ui-starter-kit/stats)
 
 A production-ready Laravel starter kit combining the power of [Laravel Volt](https://livewire.laravel.com/docs/volt) with [Mary UI](https://github.com/robsontenorio/mary). This package provides a complete authentication system and role-based authorization powered by Spatie's Laravel Permission package.
 
