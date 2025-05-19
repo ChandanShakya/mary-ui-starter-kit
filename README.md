@@ -1,66 +1,102 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Mary UI Starter Kit for Laravel
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/ChandanShakya/mary-ui-starter-kit.svg?style=flat-square)](https://packagist.org/packages/ChandanShakya/mary-ui-starter-kit)
+[![Total Downloads](https://img.shields.io/packagist/dt/ChandanShakya/mary-ui-starter-kit.svg?style=flat-square)](https://packagist.org/packages/ChandanShakya/mary-ui-starter-kit)
+[![License](https://img.shields.io/packagist/l/ChandanShakya/mary-ui-starter-kit.svg?style=flat-square)](https://packagist.org/packages/ChandanShakya/mary-ui-starter-kit)
 
-## About Laravel
+A production-ready Laravel starter kit combining the power of [Laravel Volt](https://livewire.laravel.com/docs/volt) with [Mary UI](https://github.com/robsontenorio/mary). This package provides a complete authentication system and role-based authorization powered by Spatie's Laravel Permission package.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Features
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- **Laravel 12+** - Built with the latest Laravel version
+- **Laravel Volt** - Improved Livewire component authoring experience
+- **Mary UI** - Beautiful UI components built on top of Tailwind CSS and DaisyUI
+- **Authentication System** - Complete authentication flow including:
+  - User registration
+  - Login
+  - Email verification
+  - Password recovery
+- **Role-based Authorization** - User roles and permissions management using Spatie's Laravel Permission
+- **Admin Panel** - Ready-to-use admin interface for managing users, roles, and permissions
+- **Modern Frontend** - Tailwind CSS 4 with DaisyUI components
+- **Vite** - Fast frontend tooling with hot module replacement
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Installation
 
-## Learning Laravel
+You can create a new Mary UI Starter Kit project via composer:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+```bash
+composer create-project chandanshakya/mary-ui-starter-kit
+```
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Or clone the repository manually:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+```bash
+# Clone the repository
+git clone https://github.com/ChandanShakya/mary-ui-starter-kit.git
+cd mary-ui-starter-kit
 
-## Laravel Sponsors
+# Install PHP dependencies
+composer install
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+# Copy environment file and generate app key
+cp .env.example .env
+php artisan key:generate
 
-### Premium Partners
+# Set up the database
+php artisan migrate --seed
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+# Install frontend dependencies
+npm install
+# or if you use Yarn
+yarn
+
+# Run the development server
+php artisan serve
+# In a separate terminal
+npm run dev
+# or
+yarn dev
+```
+
+## Development
+
+For a streamlined development experience, you can use the provided `dev` command:
+
+```bash
+composer dev
+```
+
+This will concurrently run:
+
+- Laravel development server
+- Queue worker
+- Laravel Pail for log monitoring
+- Vite development server with hot module replacement
+
+## Default User Credentials
+
+After running the migrations and seeders, you can login with the following credentials:
+
+| Role  | Email             | Password |
+|-------|-------------------|----------|
+| Admin | admin@example.com | password |
+| User  | user@example.com  | password |
+
+## Requirements
+
+- PHP 8.2+
+- Composer
+- Node.js & NPM
 
 ## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## Security Vulnerabilities
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+If you discover a security vulnerability within this starter kit, please send an e-mail to Chandan Shakya via [me@chandanshakya.com.np](mailto:me@chandanshakya.com.np). All security vulnerabilities will be promptly addressed.
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+The Mary UI Starter Kit is open-source software licensed under the [MIT license](https://opensource.org/licenses/MIT).

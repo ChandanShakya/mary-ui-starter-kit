@@ -1,8 +1,8 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "laravel/laravel",
+    "name": "ChandanShakya/mary-ui-starter-kit",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
+    "description": "Laravel Volt, Mary UI project starter kit with Auth and Roles",
     "keywords": [
         "laravel",
         "framework"
