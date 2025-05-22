@@ -8,7 +8,6 @@
         "src": "/(.*)",
         "dest": "/api/index.php"
     }],
-    "outputDirectory": "public",
     "env": {
         "APP_NAME": "Mary",
         "APP_ENV": "production",
