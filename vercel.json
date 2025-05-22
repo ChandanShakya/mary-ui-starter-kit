@@ -6,14 +6,19 @@
     },
     "routes": [
         {
-            "src": "/(css|js)/(.*)",
-            "dest": "public/$1/$2"
+            "src": "/build/(.*)",
+            "dest": "/build/$1"
+        },
+        {
+            "src": "/(.*\\.(?:css|js|png|jpg|jpeg|gif|svg|ico|ttf|woff|woff2|eot|otf|webp|avif|txt))$",
+            "dest": "/public/$1"
         },
         {
             "src": "/(.*)",
             "dest": "/api/index.php"
         }
     ],
+    "outputDirectory": "public",
     "env": {
         "APP_NAME": "Mary",
         "APP_ENV": "production",
