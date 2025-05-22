@@ -22,7 +22,7 @@
     "env": {
         "APP_NAME": "Mary",
         "APP_ENV": "production",
-        "APP_DEBUG": "false",
+        "APP_DEBUG": "true",
         "APP_URL": "https://mary.chandanshakya.com.np",
 
         "APP_CONFIG_CACHE": "/tmp/config.php",
