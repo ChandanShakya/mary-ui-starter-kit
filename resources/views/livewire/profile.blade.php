@@ -2,8 +2,11 @@
 
 use Livewire\Volt\Component;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\Title;
 
-new class extends Component {
+new
+#[Title('Profile')]
+class extends Component {
     public $name;
     public $email;
     public $current_password = '';
