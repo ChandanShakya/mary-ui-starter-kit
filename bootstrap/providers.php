@@ -1,7 +1,11 @@
 <?php
 
+use App\Providers\AppServiceProvider;
+use App\Providers\VoltServiceProvider;
+use Spatie\Permission\PermissionServiceProvider;
+
 return [
-    App\Providers\AppServiceProvider::class,
-    App\Providers\VoltServiceProvider::class,
-    Spatie\Permission\PermissionServiceProvider::class,
+    AppServiceProvider::class,
+    VoltServiceProvider::class,
+    PermissionServiceProvider::class,
 ];

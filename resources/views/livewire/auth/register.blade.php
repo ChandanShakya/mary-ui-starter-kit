@@ -7,21 +7,22 @@ use Livewire\Attributes\Title;
 use Livewire\Volt\Component;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
+use Livewire\Attributes\Validate;
 
 new
 #[Layout('components.layouts.empty')]
 #[Title('Registration')]
 class extends Component {
-    #[Rule('required')]
+    #[Validate('required')]
     public string $name = '';
 
-    #[Rule('required|email|unique:users')]
+    #[Validate('required|email|unique:users')]
     public string $email = '';
 
-    #[Rule('required|confirmed')]
+    #[Validate('required|confirmed')]
     public string $password = '';
 
-    #[Rule('required')]
+    #[Validate('required')]
     public string $password_confirmation = '';
 
     public function mount()
@@ -58,14 +59,14 @@ class extends Component {
     <div class="mb-10">
         <x-app-brand />
     </div>
- 
+
     <x-card title="Register" subtitle="Create a new account to get started">
         <x-form wire:submit="register">
             <x-input placeholder="Name" wire:model="name" icon="o-user" />
             <x-input placeholder="E-mail" wire:model="email" icon="o-envelope" />
             <x-input placeholder="Password" wire:model="password" type="password" icon="o-key" />
             <x-input placeholder="Confirm Password" wire:model="password_confirmation" type="password" icon="o-key" />
-    
+
             <x-slot:actions>
                 <x-button label="Already registered?" class="btn-ghost" link="/login" />
                 <x-button label="Register" type="submit" icon="o-paper-airplane" class="btn-primary" spinner="register" />

@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
@@ -15,11 +17,11 @@ Route::middleware('guest')->group(function () {
     Volt::route('/reset-password/{token}', 'auth.reset-password')->name('password.reset');
 });
 
-Route::get('/email/verify/{id}/{hash}', function (\Illuminate\Http\Request $request, $id, $hash) {
-    $user = \App\Models\User::findOrFail($id);
+Route::get('/email/verify/{id}/{hash}', function (Request $request, $id, $hash) {
+    $user = User::findOrFail($id);
 
     if (! hash_equals((string) $hash, sha1($user->getEmailForVerification()))) {
-        throw new AuthorizationException;
+        throw new AuthorizationException();
     }
 
     if ($user->hasVerifiedEmail()) {

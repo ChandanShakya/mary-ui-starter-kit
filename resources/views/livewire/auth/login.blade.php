@@ -4,16 +4,17 @@ use Livewire\Attributes\Layout;
 use Livewire\Attributes\Rule;
 use Livewire\Attributes\Title;
 use Livewire\Volt\Component;
+use Livewire\Attributes\Validate;
 
 new
 #[Layout('components.layouts.empty')]
 #[Title('Login')]
 class extends Component {
 
-    #[Rule('required|email')]
+    #[Validate('required|email')]
     public string $email = '';
 
-    #[Rule('required')]
+    #[Validate('required')]
     public string $password = '';
 
     public function mount()
@@ -30,14 +31,14 @@ class extends Component {
 
         if (auth()->attempt($credentials)) {
             $user = auth()->user();
-            
+
             request()->session()->regenerate();
 
             // If email is not verified, redirect to verification page
             if (!$user->hasVerifiedEmail()) {
                 return redirect()->route('verification.notice');
             }
-            
+
             return redirect()->intended('/');
         }
 
@@ -49,18 +50,18 @@ class extends Component {
     <div class="mb-10">
         <x-app-brand />
     </div>
- 
+
     <x-card title="Login" subtitle="Enter your credentials to access your account">
         <x-form wire:submit="login">
             <x-input placeholder="E-mail" wire:model="email" icon="o-envelope" />
             <x-input placeholder="Password" wire:model="password" type="password" icon="o-key" />
-            
+
             <div class="text-right mt-2">
                 <a href="{{ route('password.request') }}" class="text-sm text-primary hover:text-primary-focus">
                     Forgot your password?
                 </a>
             </div>
-    
+
             <x-slot:actions>
                 <x-button label="Create an account" class="btn-ghost" link="/register" />
                 <x-button label="Login" type="submit" icon="o-paper-airplane" class="btn-primary" spinner="login" />
