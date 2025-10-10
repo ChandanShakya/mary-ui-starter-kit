@@ -1,7 +1,6 @@
 <?php
 
-use Livewire\Volt\Volt;
-use function Pest\Laravel\{get, post};
+use function Pest\Laravel\get;
 
 it('renders the landing component', function () {
     // Simulate a request to the landing page

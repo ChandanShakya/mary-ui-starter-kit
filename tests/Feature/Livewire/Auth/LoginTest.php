@@ -1,7 +1,7 @@
 <?php
 
-use Livewire\Volt\Volt;
-use function Pest\Laravel\{get, post};
+use function Pest\Laravel\get;
+use function Pest\Laravel\post;
 
 it('renders the login component', function () {
     $response = get('/login');

@@ -30,4 +30,4 @@ class DefaultUsersSeeder extends Seeder
         ]);
         $user->assignRole('user');
     }
-} 
+}
