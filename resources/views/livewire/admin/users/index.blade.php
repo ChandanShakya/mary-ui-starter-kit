@@ -1,31 +1,33 @@
 <?php
 
 use App\Models\User;
-use Illuminate\Support\Collection;
 use Livewire\Volt\Component;
 use Mary\Traits\Toast;
+use Livewire\Attributes\Title;
 use Spatie\Permission\Models\Role;
 
-new class extends Component {
+new
+#[Title('User Management')]
+class extends Component {
     use Toast;
 
     public string $search = '';
     public bool $drawer = false;
     public array $sortBy = ['column' => 'name', 'direction' => 'asc'];
     public int $perPage = 10;
-    
+
     // Form properties
     public ?int $editing_id = null;
     public string $name = '';
     public string $email = '';
     public string $password = '';
     public array $selected_roles = [];
-    
+
     public function mount()
     {
         $this->authorize('view users');
     }
-    
+
     public function with(): array
     {
         return [
@@ -61,26 +63,26 @@ new class extends Component {
     public function edit(User $user): void
     {
         $this->authorize('edit users');
-        
+
         $this->editing_id = $user->id;
         $this->name = $user->name;
         $this->email = $user->email;
         $this->selected_roles = $user->roles->pluck('id')->toArray();
         $this->password = '';
-        
+
         $this->drawer = true;
     }
 
     public function create(): void
     {
         $this->authorize('create users');
-        
+
         $this->editing_id = null;
         $this->name = '';
         $this->email = '';
         $this->password = '';
         $this->selected_roles = [];
-        
+
         $this->drawer = true;
     }
 
@@ -88,7 +90,7 @@ new class extends Component {
     {
         if ($this->editing_id) {
             $this->authorize('edit users');
-            
+
             $user = User::find($this->editing_id);
             $data = $this->validate([
                 'name' => 'required|string|max:255',
@@ -96,44 +98,44 @@ new class extends Component {
                 'password' => 'nullable|min:8',
                 'selected_roles' => 'array'
             ]);
-            
+
             $user->update(array_filter([
                 'name' => $data['name'],
                 'email' => $data['email'],
                 'password' => $data['password'] ? bcrypt($data['password']) : null,
             ]));
-            
+
             $user->syncRoles($data['selected_roles']);
-            
+
             $this->success('User updated successfully');
         } else {
             $this->authorize('create users');
-            
+
             $data = $this->validate([
                 'name' => 'required|string|max:255',
                 'email' => 'required|email|unique:users,email',
                 'password' => 'required|min:8',
                 'selected_roles' => 'array'
             ]);
-            
+
             $user = User::create([
                 'name' => $data['name'],
                 'email' => $data['email'],
                 'password' => bcrypt($data['password']),
             ]);
-            
+
             $user->syncRoles($data['selected_roles']);
-            
+
             $this->success('User created successfully');
         }
-        
+
         $this->drawer = false;
     }
 
     public function delete(User $user): void
     {
         $this->authorize('delete users');
-        
+
         $user->delete();
         $this->success('User deleted successfully');
     }
@@ -152,11 +154,11 @@ new class extends Component {
 
     <!-- TABLE -->
     <x-card>
-        <x-table 
-            :headers="$headers" 
-            :rows="$users" 
-            :sort-by="$sortBy" 
-            striped 
+        <x-table
+            :headers="$headers"
+            :rows="$users"
+            :sort-by="$sortBy"
+            striped
             with-pagination
             per-page="perPage"
             :per-page-values="[5, 10, 15, 25, 50]"
@@ -166,11 +168,11 @@ new class extends Component {
                     <x-badge :value="$role->name" class="badge-ghost" />
                 @endforeach
             @endscope
-            
+
             @scope('actions', $user)
                 <div class="flex justify-center gap-1">
                     <x-button icon="o-pencil" class="btn-ghost btn-sm" @click="$wire.edit({{ $user->id }})" />
-                    <x-button icon="o-trash" class="btn-ghost btn-sm text-error" 
+                    <x-button icon="o-trash" class="btn-ghost btn-sm text-error"
                         @click="$wire.delete({{ $user->id }})"
                         wire:confirm.prompt="Are you sure?\nType DELETE to confirm|DELETE" />
                 </div>
@@ -184,11 +186,11 @@ new class extends Component {
             <x-input label="Name" wire:model="name" />
             <x-input label="Email" wire:model="email" type="email" />
             <x-input label="Password" wire:model="password" type="password" :required="!$editing_id" />
-            
-            <x-choices 
-                label="Roles" 
-                wire:model="selected_roles" 
-                :options="$roles" 
+
+            <x-choices
+                label="Roles"
+                wire:model="selected_roles"
+                :options="$roles"
                 option-value="id"
                 option-label="name"
                 multiple
@@ -202,4 +204,4 @@ new class extends Component {
             </x-slot:actions>
         </x-form>
     </x-drawer>
-</div> 
+</div>

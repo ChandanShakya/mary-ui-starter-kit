@@ -1,29 +1,31 @@
 <?php
 
-use Illuminate\Support\Collection;
 use Livewire\Volt\Component;
 use Mary\Traits\Toast;
 use Spatie\Permission\Models\Role;
+use Livewire\Attributes\Title;
 use Spatie\Permission\Models\Permission;
 
-new class extends Component {
+new
+#[Title('Role Management')]
+class extends Component {
     use Toast;
 
     public string $search = '';
     public bool $drawer = false;
     public array $sortBy = ['column' => 'name', 'direction' => 'asc'];
     public int $perPage = 10;
-    
+
     // Form properties
     public ?int $editing_id = null;
     public string $name = '';
     public array $selected_permissions = [];
-    
+
     public function mount()
     {
         $this->authorize('view roles');
     }
-    
+
     public function with(): array
     {
         return [
@@ -57,22 +59,22 @@ new class extends Component {
     public function edit(Role $role): void
     {
         $this->authorize('edit roles');
-        
+
         $this->editing_id = $role->id;
         $this->name = $role->name;
         $this->selected_permissions = $role->permissions->pluck('id')->toArray();
-        
+
         $this->drawer = true;
     }
 
     public function create(): void
     {
         $this->authorize('create roles');
-        
+
         $this->editing_id = null;
         $this->name = '';
         $this->selected_permissions = [];
-        
+
         $this->drawer = true;
     }
 
@@ -80,43 +82,43 @@ new class extends Component {
     {
         if ($this->editing_id) {
             $this->authorize('edit roles');
-            
+
             $role = Role::find($this->editing_id);
             $data = $this->validate([
                 'name' => 'required|string|max:255|unique:roles,name,'.$this->editing_id,
                 'selected_permissions' => 'array'
             ]);
-            
+
             $role->update(['name' => $data['name']]);
             $role->syncPermissions($data['selected_permissions']);
-            
+
             $this->success('Role updated successfully');
         } else {
             $this->authorize('create roles');
-            
+
             $data = $this->validate([
                 'name' => 'required|string|max:255|unique:roles,name',
                 'selected_permissions' => 'array'
             ]);
-            
+
             $role = Role::create(['name' => $data['name']]);
             $role->syncPermissions($data['selected_permissions']);
-            
+
             $this->success('Role created successfully');
         }
-        
+
         $this->drawer = false;
     }
 
     public function delete(Role $role): void
     {
         $this->authorize('delete roles');
-        
+
         if ($role->name === 'admin') {
             $this->error('Cannot delete admin role');
             return;
         }
-        
+
         $role->delete();
         $this->success('Role deleted successfully');
     }
@@ -135,11 +137,11 @@ new class extends Component {
 
     <!-- TABLE -->
     <x-card>
-        <x-table 
-            :headers="$headers" 
-            :rows="$roles" 
-            :sort-by="$sortBy" 
-            striped 
+        <x-table
+            :headers="$headers"
+            :rows="$roles"
+            :sort-by="$sortBy"
+            striped
             with-pagination
             per-page="perPage"
             :per-page-values="[5, 10, 15, 25, 50]"
@@ -151,11 +153,11 @@ new class extends Component {
                     @endforeach
                 </div>
             @endscope
-            
+
             @scope('actions', $role)
                 <div class="flex justify-center gap-1">
                     <x-button icon="o-pencil" class="btn-ghost btn-sm" @click="$wire.edit({{ $role->id }})" />
-                    <x-button icon="o-trash" class="btn-ghost btn-sm text-error" 
+                    <x-button icon="o-trash" class="btn-ghost btn-sm text-error"
                         @click="$wire.delete({{ $role->id }})"
                         wire:confirm.prompt="Are you sure?\nType DELETE to confirm|DELETE" />
                 </div>
@@ -167,11 +169,11 @@ new class extends Component {
     <x-drawer wire:model="drawer" title="{{ $editing_id ? 'Edit Role' : 'Create Role' }}" right separator with-close-button>
         <x-form wire:submit="save">
             <x-input label="Name" wire:model="name" />
-            
-            <x-choices 
-                label="Permissions" 
-                wire:model="selected_permissions" 
-                :options="$permissions" 
+
+            <x-choices
+                label="Permissions"
+                wire:model="selected_permissions"
+                :options="$permissions"
                 option-value="id"
                 option-label="name"
                 multiple
@@ -185,4 +187,4 @@ new class extends Component {
             </x-slot:actions>
         </x-form>
     </x-drawer>
-</div> 
+</div>
