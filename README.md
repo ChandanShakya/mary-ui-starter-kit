@@ -52,16 +52,12 @@ php artisan key:generate
 php artisan migrate --seed
 
 # Install frontend dependencies
-npm install
-# or if you use Yarn
-yarn
+bun install
 
 # Run the development server
 php artisan serve
 # In a separate terminal
-npm run dev
-# or
-yarn dev
+bun run dev
 ```
 
 ## Development

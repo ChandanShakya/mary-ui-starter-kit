@@ -1,6 +1,6 @@
 <?php
 
-use Livewire\Volt\Component;
+use Livewire\Component;
 use Mary\Traits\Toast;
 use Spatie\Permission\Models\Role;
 use Livewire\Attributes\Title;

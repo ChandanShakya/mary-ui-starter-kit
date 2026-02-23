@@ -8,16 +8,16 @@ use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
 // Landing page - accessible to all
-Volt::route('/', 'landing')->name('landing');
+Route::livewire('/', 'landing')->name('landing');
 
 // Authentication routes
 Route::middleware('guest')->group(function () {
-    Volt::route('/login', 'auth.login')->name('login');
-    Volt::route('/register', 'auth.register')->name('register');
-    Volt::route('/forgot-password', 'auth.forgot-password')->name(
+    Route::livewire('/login', 'auth.login')->name('login');
+    Route::livewire('/register', 'auth.register')->name('register');
+    Route::livewire('/forgot-password', 'auth.forgot-password')->name(
         'password.request',
     );
-    Volt::route('/reset-password/{token}', 'auth.reset-password')->name(
+    Route::livewire('/reset-password/{token}', 'auth.reset-password')->name(
         'password.reset',
     );
 });
@@ -61,18 +61,18 @@ Route::get('/email/verify/{id}/{hash}', function (
 
 // Email verification routes
 Route::middleware('auth')->group(function () {
-    Volt::route('/email/verify', 'auth.verify-email')->name(
+    Route::livewire('/email/verify', 'auth.verify-email')->name(
         'verification.notice',
     );
 });
 
 // Routes that require authentication but not email verification
 Route::middleware('auth')->group(function () {
-    Volt::route('/profile', 'profile')->name('profile');
-    Volt::route('/dashboard', 'dashboard')
+    Route::livewire('/profile', 'profile')->name('profile');
+    Route::livewire('/dashboard', 'dashboard')
         ->name('dashboard')
         ->middleware('permission:access dashboard');
-    Volt::route('/logout', 'auth.logout')->name('logout');
+    Route::livewire('/logout', 'auth.logout')->name('logout');
 });
 
 // Protected routes requiring email verification
@@ -82,9 +82,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
         ->prefix('admin')
         ->name('admin.')
         ->group(function () {
-            Volt::route('/users', 'admin.users.index')->name('users.index');
-            Volt::route('/roles', 'admin.roles.index')->name('roles.index');
-            Volt::route('/permissions', 'admin.permissions.index')->name(
+            Route::livewire('/users', 'admin.users.index')->name('users.index');
+            Route::livewire('/roles', 'admin.roles.index')->name('roles.index');
+            Route::livewire('/permissions', 'admin.permissions.index')->name(
                 'permissions.index',
             );
         });
