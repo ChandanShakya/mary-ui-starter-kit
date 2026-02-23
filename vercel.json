@@ -2,7 +2,7 @@
     "version": 2,
     "framework": null,
     "functions": {
-        "api/index.php": { "runtime": "vercel-php@0.7.3" }
+        "api/index.php": { "runtime": "vercel-php@0.8.0" }
     },
     "regions": ["bom1"],
     "routes": [
