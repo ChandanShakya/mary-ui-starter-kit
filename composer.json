@@ -34,7 +34,7 @@
         }
     ],
     "require": {
-        "php": "^8.4",
+        "php": "^8.2",
         "laravel/framework": "^12.52.0",
         "laravel/sanctum": "^4.3.1",
         "livewire/livewire": "^4.0",
