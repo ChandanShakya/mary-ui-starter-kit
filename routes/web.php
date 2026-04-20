@@ -5,7 +5,6 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use Livewire\Volt\Volt;
 
 // Landing page - accessible to all
 Route::livewire('/', 'landing')->name('landing');
